@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "ofMain.h"
 
 class ofxHelpMessage
@@ -28,6 +28,8 @@ public:
 	static bool getMomentary();
 	static bool getSwhoing();
 
+    static void addVar(float *var);
+
 private:
 	static ofxHelpMessage *singleton;
 	static void singletonGenerate();
@@ -42,6 +44,15 @@ private:
 	ofMutex mutex;
 
 	string message;
-	ofTrueTypeFont font;
+    string message2;
+
+    ofTrueTypeFont font;
+
+
+    string messageVars;
+    vector<float *> vars;
+
+
+    void updateVars();
 };
 

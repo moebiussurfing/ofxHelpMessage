@@ -9,4 +9,8 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
+
+    float a, b, c, d;
+
+    float *aPtr;
 };

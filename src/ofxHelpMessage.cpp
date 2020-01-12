@@ -1,6 +1,59 @@
-﻿#include "ofxHelpMessage.h"
+#include "ofxHelpMessage.h"
 
 ofxHelpMessage* ofxHelpMessage::singleton;
+
+void ofxHelpMessage::addVar(float *var)
+{
+    singletonGenerate();
+    singleton->mutex.lock();
+
+////    if (_newLine && singleton->message != "") singleton->message += '\n';
+////    singleton->message += _message;
+//    singletonGenerate();
+
+    singleton->vars.push_back(var);
+
+//    string str;
+//    str ="\n";
+//
+//    float val;
+//    val = *var;
+//
+//    str += ofToString(val);
+//    cout<< str << endl;
+
+//    singleton->message2 += str;
+//    singleton->message2 += "_var\n";
+
+    singleton->mutex.unlock();
+    singleton->updateDrawPos();
+}
+
+void ofxHelpMessage::updateVars()
+{
+    singletonGenerate();
+    singleton->mutex.lock();
+
+    message2 ="";
+    message2+="POINTER VARS:\n";
+    int i = 0;
+    for (auto &var:vars)
+    {
+        float val = *var;
+        singleton->message2 += ofToString(i);
+        singleton->message2 += "_";
+        singleton->message2 += ofToString(val);
+        singleton->message2 +="\n";
+        i++;
+
+    }
+
+    cout << message2 << endl;
+
+    singleton->mutex.unlock();
+    singleton->updateDrawPos();
+}
+
 
 ofxHelpMessage::ofxHelpMessage() {
 	showing = false;
@@ -10,6 +63,12 @@ ofxHelpMessage::ofxHelpMessage() {
 	bgColor = ofColor(0, 150);
 	pos.set(10, 10);
 	helpKey = '?';
+
+//    vars.resize(8);
+//    for (auto var:messageVars)
+//    {
+//
+//    }
 
 	ofAddListener(ofEvents().draw, this, &ofxHelpMessage::draw, OF_EVENT_ORDER_AFTER_APP);
 	ofAddListener(ofEvents().keyPressed, this, &ofxHelpMessage::keyPressed, OF_EVENT_ORDER_AFTER_APP);
@@ -26,6 +85,8 @@ void ofxHelpMessage::draw(ofEventArgs& e) {
 	}
 
 	if (showing) {
+        updateVars();
+
 		ofPushStyle();
 		if (font.isLoaded()) {
 			ofSetColor(bgColor);
@@ -33,9 +94,14 @@ void ofxHelpMessage::draw(ofEventArgs& e) {
 			ofDrawRectangle(font.getStringBoundingBox(message, drawPos.x, drawPos.y));
 			ofSetColor(textColor);
 			font.drawString(message, drawPos.x, drawPos.y);
+
+            font.drawString(message2, drawPos.x, drawPos.y+200);
+
 		}
 		else {
 			ofDrawBitmapStringHighlight(message, drawPos, bgColor, textColor);
+
+            ofDrawBitmapStringHighlight(message2, drawPos.x, drawPos.y+200, bgColor, textColor);
 		}
 		ofPopStyle();
 	}
