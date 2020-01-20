@@ -51,7 +51,6 @@ void ofxHelpMessage::addTitle(string *label, string name, bool _newLine)
 	singleton->updateDrawPos();
 }
 
-
 void ofxHelpMessage::updateVars()
 {
 	//to read pointers every frame cycle
@@ -106,22 +105,8 @@ void ofxHelpMessage::updateVars()
             default:
                 break;
         }
-
-//        float val = *var;
-//        singleton->message2 += names[i];
-//        singleton->message2 += ": ";
-//        //singleton->message2 += ofToString(i);
-//        //singleton->message2 += "_";
-//        singleton->message2 += ofToString(val);
-//        singleton->message2 += "\n";
-
 		i++;
-
 	}
-
-//    cout << message2 << endl;
-//    messageBox = message + "\n"+message2;
-
 
 	singleton->mutex.unlock();
 	singleton->updateDrawPos();
@@ -160,18 +145,13 @@ void ofxHelpMessage::draw(ofEventArgs& e) {
 		if (font.isLoaded()) {
 			ofSetColor(bgColor);
 			ofFill();
-			ofDrawRectangle(font.getStringBoundingBox(message, drawPos.x, drawPos.y));
+			ofDrawRectangle(font.getStringBoundingBox(messageBox, drawPos.x, drawPos.y));
 			ofSetColor(textColor);
 
-			//font.drawString(message, drawPos.x, drawPos.y);
-			//font.drawString(message2, drawPos.x, drawPos.y + 200);
 			font.drawString(messageBox, drawPos.x, drawPos.y);
 
 		}
 		else {
-
-			//ofDrawBitmapStringHighlight(message, drawPos, bgColor, textColor);
-			//ofDrawBitmapStringHighlight(message2, drawPos.x, drawPos.y + 200, bgColor, textColor);
 			ofDrawBitmapStringHighlight(messageBox, drawPos, bgColor, textColor);
 		}
 		ofPopStyle();
@@ -193,7 +173,7 @@ void ofxHelpMessage::loadFont(string _path, float _size) {
 
 void ofxHelpMessage::clear() {
 	singletonGenerate();
-	singleton->message = "";
+	singleton->messageBox = "";
 }
 
 void ofxHelpMessage::setPos(ofVec2f _pos) {
