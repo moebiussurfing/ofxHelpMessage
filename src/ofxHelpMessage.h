@@ -28,9 +28,14 @@ public:
 	static bool getMomentary();
 	static bool getSwhoing();
 
-    static void addVar(float *var);
+    static void addVar(float *var, string name, bool _newLine = true);
+
+	static void setTitle(string name);
 
 private:
+
+	unordered_map<string, double> maptest;
+
 	static ofxHelpMessage *singleton;
 	static void singletonGenerate();
 
@@ -45,13 +50,15 @@ private:
 
 	string message;
     string message2;
+	string messageBox;
 
     ofTrueTypeFont font;
 
 
     string messageVars;
-    vector<float *> vars;
-
+	vector<float *> vars;
+	vector<std::string> names;
+	std::string varsTitle;
 
     void updateVars();
 };

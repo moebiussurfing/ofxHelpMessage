@@ -2,56 +2,74 @@
 
 ofxHelpMessage* ofxHelpMessage::singleton;
 
-void ofxHelpMessage::addVar(float *var)
+void ofxHelpMessage::addVar(float *var, string name, bool _newLine)
 {
-    singletonGenerate();
-    singleton->mutex.lock();
+	singletonGenerate();
+	singleton->mutex.lock();
 
-////    if (_newLine && singleton->message != "") singleton->message += '\n';
-////    singleton->message += _message;
-//    singletonGenerate();
+	////    if (_newLine && singleton->message != "") singleton->message += '\n';
+	////    singleton->message += _message;
+	//    singletonGenerate();
 
-    singleton->vars.push_back(var);
+	singleton->vars.push_back(var);
 
-//    string str;
-//    str ="\n";
-//
-//    float val;
-//    val = *var;
-//
-//    str += ofToString(val);
-//    cout<< str << endl;
+	//if (_newLine && name != "") name += '\n';
 
-//    singleton->message2 += str;
-//    singleton->message2 += "_var\n";
+	singleton->names.push_back(name);
 
-    singleton->mutex.unlock();
-    singleton->updateDrawPos();
+	//    string str;
+	//    str ="\n";
+	//
+	//    float val;
+	//    val = *var;
+	//
+	//    str += ofToString(val);
+	//    cout<< str << endl;
+
+	//    singleton->message2 += str;
+	//    singleton->message2 += "_var\n";
+
+	singleton->mutex.unlock();
+	singleton->updateDrawPos();
+}
+void ofxHelpMessage::setTitle(string name)
+{
+	singletonGenerate();
+	singleton->mutex.lock();
+	singleton->varsTitle = name+"\n";
+	singleton->mutex.unlock();
+	singleton->updateDrawPos();
 }
 
 void ofxHelpMessage::updateVars()
 {
-    singletonGenerate();
-    singleton->mutex.lock();
+	//to read pointers every frame cycle
+	singletonGenerate();
+	singleton->mutex.lock();
 
-    message2 ="";
-    message2+="POINTER VARS:\n";
-    int i = 0;
-    for (auto &var:vars)
-    {
-        float val = *var;
-        singleton->message2 += ofToString(i);
-        singleton->message2 += "_";
-        singleton->message2 += ofToString(val);
-        singleton->message2 +="\n";
-        i++;
+	message2 = "";
+	message2 += varsTitle;
+	//message2 += "\n";
 
-    }
+	int i = 0;
+	for (auto &var : vars)
+	{
+		float val = *var;
+		singleton->message2 += names[i];
+		singleton->message2 += ": ";
+		//singleton->message2 += ofToString(i);
+		//singleton->message2 += "_";
+		singleton->message2 += ofToString(val);
+		singleton->message2 += "\n";
+		i++;
 
-    cout << message2 << endl;
+	}
+	cout << message2 << endl;
 
-    singleton->mutex.unlock();
-    singleton->updateDrawPos();
+	messageBox = message + "\n"+message2;
+
+	singleton->mutex.unlock();
+	singleton->updateDrawPos();
 }
 
 
@@ -64,11 +82,11 @@ ofxHelpMessage::ofxHelpMessage() {
 	pos.set(10, 10);
 	helpKey = '?';
 
-//    vars.resize(8);
-//    for (auto var:messageVars)
-//    {
-//
-//    }
+	//    vars.resize(8);
+	//    for (auto var:messageVars)
+	//    {
+	//
+	//    }
 
 	ofAddListener(ofEvents().draw, this, &ofxHelpMessage::draw, OF_EVENT_ORDER_AFTER_APP);
 	ofAddListener(ofEvents().keyPressed, this, &ofxHelpMessage::keyPressed, OF_EVENT_ORDER_AFTER_APP);
@@ -85,7 +103,7 @@ void ofxHelpMessage::draw(ofEventArgs& e) {
 	}
 
 	if (showing) {
-        updateVars();
+		updateVars();
 
 		ofPushStyle();
 		if (font.isLoaded()) {
@@ -93,15 +111,17 @@ void ofxHelpMessage::draw(ofEventArgs& e) {
 			ofFill();
 			ofDrawRectangle(font.getStringBoundingBox(message, drawPos.x, drawPos.y));
 			ofSetColor(textColor);
-			font.drawString(message, drawPos.x, drawPos.y);
 
-            font.drawString(message2, drawPos.x, drawPos.y+200);
+			//font.drawString(message, drawPos.x, drawPos.y);
+			//font.drawString(message2, drawPos.x, drawPos.y + 200);
+			font.drawString(messageBox, drawPos.x, drawPos.y);
 
 		}
 		else {
-			ofDrawBitmapStringHighlight(message, drawPos, bgColor, textColor);
 
-            ofDrawBitmapStringHighlight(message2, drawPos.x, drawPos.y+200, bgColor, textColor);
+			//ofDrawBitmapStringHighlight(message, drawPos, bgColor, textColor);
+			//ofDrawBitmapStringHighlight(message2, drawPos.x, drawPos.y + 200, bgColor, textColor);
+			ofDrawBitmapStringHighlight(messageBox, drawPos, bgColor, textColor);
 		}
 		ofPopStyle();
 	}
@@ -204,7 +224,8 @@ void ofxHelpMessage::singletonGenerate() {
 void ofxHelpMessage::updateDrawPos() {
 	// calc position
 	if (font.isLoaded()) {
-		auto fontBoundingBox = singleton->font.getStringBoundingBox(message, pos.x, pos.y);
+		//auto fontBoundingBox = singleton->font.getStringBoundingBox(message, pos.x, pos.y);
+		auto fontBoundingBox = singleton->font.getStringBoundingBox(messageBox, pos.x, pos.y);
 		drawPos = pos * 2 - ofVec2f(fontBoundingBox.x, fontBoundingBox.y);
 	}
 	else {

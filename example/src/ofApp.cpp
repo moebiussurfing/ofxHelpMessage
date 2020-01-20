@@ -9,15 +9,16 @@ void ofApp::setup() {
 	ofxHelpMessage::addMessage("HELP (dummy message)");
 	ofxHelpMessage::addMessage("Key S: Save");
 	ofxHelpMessage::addMessage("Key L: Load");
+	ofxHelpMessage::addMessage("");
 
     a = ofRandom (0,1);
     b = ofRandom (0,1);
     c = ofRandom (0,1);
     d = ofRandom (0,1);
 
-    ofxHelpMessage::addVar(&a);
-    ofxHelpMessage::addVar(&b);
-    ofxHelpMessage::addVar(&c);
+    ofxHelpMessage::addVar(&a, "myFloat a");
+    ofxHelpMessage::addVar(&b, "myFloat b");
+    ofxHelpMessage::addVar(&c, "myFloat c");
 
 	// clear message
 	//ofxHelpMessage::clear();
@@ -46,7 +47,7 @@ void ofApp::setup() {
 	// default: true (momentary)
     ofxHelpMessage::setMomentary(false); // toggle mode
 
-
+	ofxHelpMessage::setTitle("FONTS DEBUG");
 }
 
 //--------------------------------------------------------------
