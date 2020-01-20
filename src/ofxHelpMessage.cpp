@@ -2,44 +2,44 @@
 
 ofxHelpMessage* ofxHelpMessage::singleton;
 
+void ofxHelpMessage::addMessage(string _message, string name, bool _newLine) {
+    singletonGenerate();
+    singleton->mutex.lock();
+
+    singleton->messages.push_back(_message);
+    int pos = singleton->messages.size()-1;
+    singleton->items.push_back(MSG_Item{name, MSG_TEXT, pos});
+
+    singleton->mutex.unlock();
+    singleton->updateDrawPos();
+}
+
 void ofxHelpMessage::addVar(float *var, string name, bool _newLine)
 {
 	singletonGenerate();
 	singleton->mutex.lock();
 
-	////    if (_newLine && singleton->message != "") singleton->message += '\n';
-	////    singleton->message += _message;
-	//    singletonGenerate();
-
-	singleton->vars.push_back(var);
-
-	//if (_newLine && name != "") name += '\n';
-
-	singleton->names.push_back(name);
-
-	//    string str;
-	//    str ="\n";
-	//
-	//    float val;
-	//    val = *var;
-	//
-	//    str += ofToString(val);
-	//    cout<< str << endl;
-
-	//    singleton->message2 += str;
-	//    singleton->message2 += "_var\n";
+    singleton->vars.push_back(var);
+    int pos = singleton->vars.size()-1;
+    singleton->items.push_back(MSG_Item{name, MSG_FLOAT, pos});
 
 	singleton->mutex.unlock();
 	singleton->updateDrawPos();
 }
-void ofxHelpMessage::setTitle(string name)
+
+void ofxHelpMessage::addTitle(string *label, string name, bool _newLine)
 {
 	singletonGenerate();
 	singleton->mutex.lock();
-	singleton->varsTitle = name+"\n";
+
+    singleton->titles.push_back(label);
+    int pos = singleton->titles.size()-1;
+    singleton->items.push_back(MSG_Item{name, MSG_TITLE, pos});
+
 	singleton->mutex.unlock();
 	singleton->updateDrawPos();
 }
+
 
 void ofxHelpMessage::updateVars()
 {
@@ -47,26 +47,67 @@ void ofxHelpMessage::updateVars()
 	singletonGenerate();
 	singleton->mutex.lock();
 
-	message2 = "";
-	message2 += varsTitle;
-	//message2 += "\n";
+    singleton->messageBox = "";
 
 	int i = 0;
-	for (auto &var : vars)
+	for (auto &item : items)
 	{
-		float val = *var;
-		singleton->message2 += names[i];
-		singleton->message2 += ": ";
-		//singleton->message2 += ofToString(i);
-		//singleton->message2 += "_";
-		singleton->message2 += ofToString(val);
-		singleton->message2 += "\n";
+        switch (item.type) {
+            case MSG_TITLE:
+            {
+                int ii = singleton->items[i].position;
+                string nn = singleton->items[i].name;
+                string temp = *singleton->titles[ii];
+                singleton->messageBox += nn;
+                singleton->messageBox += ": ";
+                singleton->messageBox += temp;
+                singleton->messageBox += "\n";
+            }
+                break;
+
+            case MSG_TEXT:
+            {
+                int ii = singleton->items[i].position;
+                string nn = singleton->items[i].name;
+                string temp = singleton->messages[ii];
+                singleton->messageBox += nn;
+                singleton->messageBox += ": ";
+                singleton->messageBox += temp;
+                singleton->messageBox += "\n";
+            }
+                break;
+
+            case MSG_FLOAT:
+            {
+                int ii = singleton->items[i].position;
+                string nn = singleton->items[i].name;
+                string temp = ofToString(*singleton->vars[ii]);
+                singleton->messageBox += nn;
+                singleton->messageBox += ": ";
+                singleton->messageBox += temp;
+                singleton->messageBox += "\n";
+            }
+                break;
+
+            default:
+                break;
+        }
+
+//        float val = *var;
+//        singleton->message2 += names[i];
+//        singleton->message2 += ": ";
+//        //singleton->message2 += ofToString(i);
+//        //singleton->message2 += "_";
+//        singleton->message2 += ofToString(val);
+//        singleton->message2 += "\n";
+
 		i++;
 
 	}
-	cout << message2 << endl;
 
-	messageBox = message + "\n"+message2;
+//    cout << message2 << endl;
+//    messageBox = message + "\n"+message2;
+
 
 	singleton->mutex.unlock();
 	singleton->updateDrawPos();
@@ -82,11 +123,7 @@ ofxHelpMessage::ofxHelpMessage() {
 	pos.set(10, 10);
 	helpKey = '?';
 
-	//    vars.resize(8);
-	//    for (auto var:messageVars)
-	//    {
-	//
-	//    }
+    messageBox = "";
 
 	ofAddListener(ofEvents().draw, this, &ofxHelpMessage::draw, OF_EVENT_ORDER_AFTER_APP);
 	ofAddListener(ofEvents().keyPressed, this, &ofxHelpMessage::keyPressed, OF_EVENT_ORDER_AFTER_APP);
@@ -139,15 +176,6 @@ void ofxHelpMessage::loadFont(string _path, float _size) {
 	singleton->updateDrawPos();
 }
 
-void ofxHelpMessage::addMessage(string _message, bool _newLine) {
-	singletonGenerate();
-	singleton->mutex.lock();
-	if (_newLine && singleton->message != "") singleton->message += '\n';
-	singleton->message += _message;
-	singleton->mutex.unlock();
-
-	singleton->updateDrawPos();
-}
 
 void ofxHelpMessage::clear() {
 	singletonGenerate();
@@ -224,7 +252,6 @@ void ofxHelpMessage::singletonGenerate() {
 void ofxHelpMessage::updateDrawPos() {
 	// calc position
 	if (font.isLoaded()) {
-		//auto fontBoundingBox = singleton->font.getStringBoundingBox(message, pos.x, pos.y);
 		auto fontBoundingBox = singleton->font.getStringBoundingBox(messageBox, pos.x, pos.y);
 		drawPos = pos * 2 - ofVec2f(fontBoundingBox.x, fontBoundingBox.y);
 	}

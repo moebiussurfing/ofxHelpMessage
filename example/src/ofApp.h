@@ -10,7 +10,7 @@ class ofApp : public ofBaseApp{
 		void update();
 		void draw();
 
-    float a, b, c, d;
-
-    float *aPtr;
+    float f1, f2, f3, f4;
+    string str1, str2;
+    string tit1, tit2;
 };

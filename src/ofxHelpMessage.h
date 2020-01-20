@@ -8,13 +8,47 @@ private:
 	~ofxHelpMessage();
 
 public:
+
+    enum MSG_TYPES{
+        MSG_TITLE = 0,
+        MSG_TEXT,
+        MSG_FLOAT,
+        MSG_STRING,
+        MSG_BOOL
+    };
+
+    struct MSG_Item {
+        string name;
+        MSG_TYPES type;
+        int position;
+    };
+    vector<MSG_Item> items;
+
+    vector<std::string> messages;
+    vector<std::string*> titles;
+    vector<float *> vars;
+
+
+
+    static void addMessage(string _message, string name, bool _newLine = true);
+    static void addVar(float *var, string name, bool _newLine = true);
+    static void addTitle(string *label, string name, bool _newLine = true);
+
+
+
+
+//    std::string varsTitle;
+//    string messageVars;
+
+
 	void draw(ofEventArgs &e);
 	void keyPressed(ofKeyEventArgs& key);
 
 	// static function
 	static void loadFont(string _path, float _size);
-	static void addMessage(string _message, bool _newLine = true);
-	static void clear();
+
+
+    static void clear();
 	static void setPos(ofVec2f _pos);
 	static void setPos(float _x, float _y);
 	static ofVec2f getPos();
@@ -27,10 +61,6 @@ public:
 	static void setMomentary(bool _momentary);
 	static bool getMomentary();
 	static bool getSwhoing();
-
-    static void addVar(float *var, string name, bool _newLine = true);
-
-	static void setTitle(string name);
 
 private:
 
@@ -54,11 +84,6 @@ private:
 
     ofTrueTypeFont font;
 
-
-    string messageVars;
-	vector<float *> vars;
-	vector<std::string> names;
-	std::string varsTitle;
 
     void updateVars();
 };
