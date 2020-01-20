@@ -2,6 +2,17 @@
 
 ofxHelpMessage* ofxHelpMessage::singleton;
 
+void ofxHelpMessage::setTitle(string _title)
+{
+    singletonGenerate();
+    singleton->mutex.lock();
+
+    singleton->title = _title;
+
+    singleton->mutex.unlock();
+    singleton->updateDrawPos();
+}
+
 void ofxHelpMessage::addMessage(string _message, string name, bool _newLine) {
     singletonGenerate();
     singleton->mutex.lock();
@@ -48,6 +59,9 @@ void ofxHelpMessage::updateVars()
 	singleton->mutex.lock();
 
     singleton->messageBox = "";
+
+    singleton->messageBox += title;
+    singleton->messageBox += ":\n";
 
 	int i = 0;
 	for (auto &item : items)

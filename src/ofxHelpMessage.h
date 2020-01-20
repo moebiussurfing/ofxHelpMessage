@@ -35,7 +35,9 @@ public:
     static void addTitle(string *label, string name, bool _newLine = true);
 
 
+static void setTitle(string _title);
 
+    std::string title;
 
 //    std::string varsTitle;
 //    string messageVars;

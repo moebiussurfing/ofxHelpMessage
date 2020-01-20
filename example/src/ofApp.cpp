@@ -47,7 +47,7 @@ void ofApp::setup() {
 	// default: true (momentary)
     ofxHelpMessage::setMomentary(false); // toggle mode
 
-//    ofxHelpMessage::setTitle("FONTS DEBUG");
+    ofxHelpMessage::setTitle("FONTS DEBUG");
 }
 
 //--------------------------------------------------------------
