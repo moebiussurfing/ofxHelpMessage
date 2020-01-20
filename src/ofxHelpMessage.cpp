@@ -58,7 +58,6 @@ void ofxHelpMessage::updateVars()
 	singleton->mutex.lock();
 
     singleton->messageBox = "";
-
     singleton->messageBox += title;
     singleton->messageBox += ":\n";
 

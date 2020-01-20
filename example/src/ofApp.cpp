@@ -62,19 +62,19 @@ void ofApp::update() {
     int strRandom1 = ofRandom(0,5);
     switch (strRandom1) {
         case 0:
-            tit1 = "-1111";
+            tit1 = "|    ";
             break;
         case 1:
-            tit1 = "1-111";
+            tit1 = " |   ";
             break;
         case 2:
-            tit1 = "11-11";
+            tit1 = "  |  ";
             break;
         case 3:
-            tit1 = "111-1";
+            tit1 = "   | ";
             break;
         case 4:
-            tit1 = "1111-";
+            tit1 = "    |";
             break;
         default:
             break;
