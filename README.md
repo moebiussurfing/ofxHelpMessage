@@ -7,14 +7,13 @@ You can add text messages like the original addon, but you can show other variab
 Added variables (string, float, int, bool) are referenced, and can be showed in realtime in the same text box.
 You dont need to update nothing.
 
-Changes by MoebiusSurfing. 
-Original author: Toru Takata, Thanks!
+Changes by MoebiusSurfing. Original author: Toru Takata, Thanks!
 
 ![Alt text](/screenshot.jpg?raw=true "MoebiusSurfing")
 
 ## Usage
 
-# ofApp.h
+### ofApp.h
 ```cpp
     #include "ofxHelpMessage.h"
 
@@ -24,36 +23,31 @@ Original author: Toru Takata, Thanks!
     bool b1;
 ```
 
-# ofApp.cpp
+### ofApp.cpp
 ```cpp 
 
 setup()
 
     // add the referenced variables that you what to show printed in the screen box
     ofxHelpMessage::setTitle("APP INFO                \n");
-    ofxHelpMessage::addText("text2", "KEY [SPACE]: HIDE/SHOW");//name is not used in this type. no variable, just text
+    ofxHelpMessage::addText("text2", "KEY [SPACE]: HIDE/SHOW");//name is not used in this type. no variable, just the text
     ofxHelpMessage::addString("myString1", &str1);//pass all variables as references
     ofxHelpMessage::addFloat("myFloat1 ", &f1);
     ofxHelpMessage::addInt("myInt1   ", &i1);
     ofxHelpMessage::addBool("myBool1  ", &b1);
     
     //optional:
-
     // set margin borders
     ofxHelpMessage::setMarginBorders(20);
-
     // tab labels and values
     ofxHelpMessage::setTabbed(true, 1);
-
     // round bbox
     ofxHelpMessage::setRounded(true, 5.0f);
-
     // show
     ofxHelpMessage::setVisible(true);
 
 
 update()
-
     //your variables will change...
     //but nothing more to do.
 ```
