@@ -45,7 +45,8 @@ void ofApp::setup() {
     // set font
     // draw with ofTrueTypeFont if loaded
     //ofxHelpMessage::loadFont("arial.ttf", fSize);
-    ofxHelpMessage::loadFont("overpass-mono-light.otf", fSize);
+    //ofxHelpMessage::loadFont("overpass-mono-light.otf", fSize);
+	ofxHelpMessage::loadFont("mono.ttf", fSize);
 
     // set position
     // default: (10, 10)
