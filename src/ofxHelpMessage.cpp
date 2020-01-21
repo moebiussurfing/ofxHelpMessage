@@ -109,7 +109,7 @@ void ofxHelpMessage::updateItems()
                     {
                         for (int i = 0; i<tabsNum; i++)
                         {
-                            singleton->messageBox += "\t";
+                            singleton->messageBox += "   \t";
                         }
                     }
                 }
@@ -131,7 +131,7 @@ void ofxHelpMessage::updateItems()
                 {
                     for (int i = 0; i<tabsNum; i++)
                     {
-                        singleton->messageBox += "\t";
+                        singleton->messageBox += "   \t";
                     }
                 }
                 //singleton->messageBox += ":";
@@ -151,7 +151,7 @@ void ofxHelpMessage::updateItems()
                 {
                     for (int i = 0; i<tabsNum; i++)
                     {
-                        singleton->messageBox += "\t";
+                        singleton->messageBox += "   \t";
                     }
                 }
                 //singleton->messageBox += ":";
@@ -171,7 +171,7 @@ void ofxHelpMessage::updateItems()
                 {
                     for (int i = 0; i<tabsNum; i++)
                     {
-                        singleton->messageBox += "\t";
+                        singleton->messageBox += "   \t";
                     }
                 }
                 //singleton->messageBox += ":";
@@ -191,7 +191,7 @@ void ofxHelpMessage::updateItems()
                 {
                     for (int i = 0; i<tabsNum; i++)
                     {
-                        singleton->messageBox += "\t";
+                        singleton->messageBox += "   \t";
                     }
                 }
                 //singleton->messageBox += ":";

@@ -5,11 +5,9 @@ void ofApp::setup() {
 
     ofSetFrameRate(25);
 
-    //    ofEnableDataPath();
-
     // add message
 
-    title = "APP INFO                ";//+spaces to avoid resizing on bbox
+    title = "APP INFO                  \n";//+spaces to avoid resizing on bbox
     ofxHelpMessage::setTitle(title);
 
     //name not showed in text type
@@ -18,18 +16,18 @@ void ofApp::setup() {
     ofxHelpMessage::addText("text3", "");
 
     ofxHelpMessage::addText("text4", "DEBUG:");
-    ofxHelpMessage::addString("myString1", &str1);
     ofxHelpMessage::addString("myString2", &str2);
     ofxHelpMessage::addFloat("myFloat1 ", &f1);
     ofxHelpMessage::addFloat("myFloat2 ", &f2);
     ofxHelpMessage::addFloat("myFloat3 ", &f3);
-    ofxHelpMessage::addFloat("myFloat4 ", &f4);
+    ofxHelpMessage::addString("myString1", &str1);
 
     ofxHelpMessage::addText("text", "\nCOUNTERS:");
     ofxHelpMessage::addInt("myInt1   ", &i1);
     ofxHelpMessage::addInt("myInt2   ", &i2);
+    ofxHelpMessage::addFloat("myFloat4 ", &f4);
 
-    ofxHelpMessage::addText("text", "\nSWITCHES:\n");
+    ofxHelpMessage::addText("text", "\nSWITCHES:");
     ofxHelpMessage::addBool("myBool1  ", &b1);
     ofxHelpMessage::addBool("myBool2  ", &b2);
 
@@ -51,7 +49,7 @@ void ofApp::setup() {
 
     // set position
     // default: (10, 10)
-    ofxHelpMessage::setPos(400, 200);
+    ofxHelpMessage::setPos(10, 10);
 
     // change show message key
     // default: '?'
@@ -70,7 +68,7 @@ void ofApp::setup() {
     ofxHelpMessage::setTabbed(true, 1);
 
     // round bbox
-    ofxHelpMessage::setRounded(true, 5.0f);
+    ofxHelpMessage::setRounded(true);
 
     // show
     ofxHelpMessage::setVisible(true);
