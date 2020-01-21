@@ -4,7 +4,7 @@
 
 You can add text messages like the original addon, but you can show other variables in realtime too.
 
-Variables are referenced and can be showed in realtime in the same text box, no need to update nothing.
+Added variables (string, float, int, bool) are referenced, and can be showed in realtime in the same text box, no need to update nothing.
 
 Changes by MoebiusSurfing. 
 Original author: Toru Takata, Thanks!
