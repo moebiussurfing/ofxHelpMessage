@@ -1,21 +1,20 @@
 # ofxHelpMessage
 
-## CHANGES IN THIS REPO:
+## CHANGES IN THIS FORK:
 
-You can add text messages like the original addon, but you can show other variables in realtime too.
+You can add text messages like the original addon, but you can show other variables too.
 
-Added variables (string, float, int, bool) are referenced, and can be showed in realtime in the same text box, no need to update nothing.
+Added variables (string, float, int, bool) are referenced, and can be showed in realtime in the same text box. You dont need to update nothing.
 
-Changes by MoebiusSurfing. 
-Original author: Toru Takata, Thanks!
+Changes by MoebiusSurfing. Original author: Toru Takata, Thanks!
 
 ![Alt text](/screenshot.jpg?raw=true "MoebiusSurfing")
 
 ## Usage
 
-# ofApp.h
+### ofApp.h
 ```cpp
-#include "ofxHelpMessage.h"
+    #include "ofxHelpMessage.h"
 
     string st1;
     float f1;
@@ -23,13 +22,13 @@ Original author: Toru Takata, Thanks!
     bool b1;
 ```
 
-# ofApp.cpp
+### ofApp.cpp
 ```cpp 
 
 setup()
 
     // add the referenced variables that you what to show printed in screen box
-    ofxHelpMessage::setTitle("APP INFO                ");
+    ofxHelpMessage::setTitle("APP INFO                \n");
     ofxHelpMessage::addText("text2", "KEY [SPACE]: HIDE/SHOW");
     ofxHelpMessage::addString("myString1", &str1);//pass variables as references
     ofxHelpMessage::addFloat("myFloat1 ", &f1);
@@ -37,19 +36,14 @@ setup()
     ofxHelpMessage::addBool("myBool1  ", &b1);
     
     //optional:
-
     // set margin borders
     ofxHelpMessage::setMarginBorders(20);
-
     // tab labels and values
     ofxHelpMessage::setTabbed(true, 1);
-
     // round bbox
     ofxHelpMessage::setRounded(true, 5.0f);
-
     // show
     ofxHelpMessage::setVisible(true);
-
 
 update()
 
