@@ -66,7 +66,7 @@ void ofApp::setup() {
     // default 5
     ofxHelpMessage::setMarginBorders(20);
 
-    // tab labeles and values
+    // tab labels and values
     ofxHelpMessage::setTabbed(true, 1);
 
     // round bbox
