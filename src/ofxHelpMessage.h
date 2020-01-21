@@ -50,7 +50,8 @@ public:
 
     static void setMarginBorders(int _margin);
     static void setTabbed(bool b, int num = 1);
-    static void setRounded(bool b, int size = 10.0f);
+    static void setRounded(bool b, float size = 10.0f);
+    static void setFloatResolution(int res = 2);
 
     static void setVisible(bool _showing);
 
@@ -100,7 +101,9 @@ private:
     int tabsNum = 1;
     bool bRounded = false;
     float roundedSize = 10.0f;
+    int fRes = 2;
 
     ofRectangle rectBB;
+
 };
 

@@ -67,6 +67,9 @@ void ofApp::setup() {
     // tab labels and values
     ofxHelpMessage::setTabbed(true, 1);
 
+    // float decimals
+    ofxHelpMessage::setFloatResolution(3);
+
     // round bbox
     ofxHelpMessage::setRounded(true);
 

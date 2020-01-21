@@ -144,7 +144,7 @@ void ofxHelpMessage::updateItems()
             {
                 int ii = singleton->items[i].position;
                 string n = singleton->items[i].name;
-                string v = ofToString(*singleton->floats[ii]);
+                string v = ofToString(*singleton->floats[ii], fRes);
                 singleton->messageBox += n;
                 //singleton->messageBox += ":";
                 if (bTabbed)
@@ -400,8 +400,13 @@ void ofxHelpMessage::setTabbed(bool b, int num){
     singleton->tabsNum = num;
 }
 
-void ofxHelpMessage::setRounded(bool b, int size){
+void ofxHelpMessage::setRounded(bool b, float size){
     singletonGenerate();
     singleton->bRounded = b;
     singleton->roundedSize = size;
+}
+
+void ofxHelpMessage::setFloatResolution(int res){
+    singletonGenerate();
+    singleton->fRes = res;
 }

@@ -4,7 +4,8 @@
 
 You can add text messages like the original addon, but you can show other variables too.
 
-Added variables (string, float, int, bool) are referenced, and can be showed in realtime in the same text box. You dont need to update nothing.
+Added variables (string, float, int, bool) are referenced, and can be showed in realtime in the same text box.
+You dont need to update nothing.
 
 Changes by MoebiusSurfing. Original author: Toru Takata, Thanks!
 
@@ -27,10 +28,10 @@ Changes by MoebiusSurfing. Original author: Toru Takata, Thanks!
 
 setup()
 
-    // add the referenced variables that you what to show printed in screen box
+    // add the referenced variables that you what to show printed in the screen box
     ofxHelpMessage::setTitle("APP INFO                \n");
-    ofxHelpMessage::addText("text2", "KEY [SPACE]: HIDE/SHOW");
-    ofxHelpMessage::addString("myString1", &str1);//pass variables as references
+    ofxHelpMessage::addText("text2", "KEY [SPACE]: HIDE/SHOW");//name is not used in this type. no variable, just the text
+    ofxHelpMessage::addString("myString1", &str1);//pass all variables as references
     ofxHelpMessage::addFloat("myFloat1 ", &f1);
     ofxHelpMessage::addInt("myInt1   ", &i1);
     ofxHelpMessage::addBool("myBool1  ", &b1);
@@ -45,8 +46,8 @@ setup()
     // show
     ofxHelpMessage::setVisible(true);
 
-update()
 
+update()
     //your variables will change...
     //but nothing more to do.
 ```
