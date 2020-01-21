@@ -74,7 +74,7 @@ void ofApp::setup() {
     ofxHelpMessage::setRounded(true);
 
     // show
-    ofxHelpMessage::setVisible(true);
+    ofxHelpMessage::setShowing(true);
 
 }
 

@@ -53,7 +53,7 @@ public:
     static void setRounded(bool b, float size = 10.0f);
     static void setFloatResolution(int res = 2);
 
-    static void setVisible(bool _showing);
+    static void setShowing(bool _showing);
 
 private:
 

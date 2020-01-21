@@ -354,7 +354,7 @@ void ofxHelpMessage::setMomentary(bool _momentary) {
     if (singleton->momentary) singleton->showing = ofGetKeyPressed(singleton->helpKey);
 }
 
-void ofxHelpMessage::setVisible(bool _showing) {
+void ofxHelpMessage::setShowing(bool _showing) {
     singletonGenerate();
     singleton->showing = _showing;
 }
