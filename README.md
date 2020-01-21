@@ -1,6 +1,6 @@
 # ofxHelpMessage
 
-## CHANGES IN THIS REPO:
+## CHANGES IN THIS FORK:
 
 You can add text messages like the original addon, but you can show other variables in realtime too.
 
