@@ -5,8 +5,6 @@ void ofApp::setup() {
 
     ofSetFrameRate(25);
 
-    //    ofEnableDataPath();
-
     // add message
 
     title = "APP INFO                ";//+spaces to avoid resizing on bbox
