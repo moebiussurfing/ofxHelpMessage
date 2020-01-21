@@ -14,6 +14,8 @@ Original author: Toru Takata, Thanks!
 
 # ofApp.h
 ```cpp
+#include "ofxHelpMessage.h"
+
     string st1;
     float f1;
     int i1;
