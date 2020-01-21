@@ -5,67 +5,81 @@ void ofApp::setup() {
 
     ofSetFrameRate(25);
 
-//    ofEnableDataPath();
+    //    ofEnableDataPath();
 
     // add message
 
-    title = "FONTS DEBUG";
+    title = "APP INFO                ";//+spaces to avoid resizing on bbox
     ofxHelpMessage::setTitle(title);
 
-    ofxHelpMessage::addText("HELP:", "text1");
-	ofxHelpMessage::addText("Key [SPACE]: HIDE/SHOW", "text2");
-	ofxHelpMessage::addText("Key [D]: DEBUG", "text3");
-	ofxHelpMessage::addText(" ", "text4");
+    //name not showed in text type
+    ofxHelpMessage::addText("text1", "HELP:");
+    ofxHelpMessage::addText("text2", "KEY [SPACE]: HIDE/SHOW");
+    ofxHelpMessage::addText("text3", "");
 
-    ofxHelpMessage::addString(&str1, "myString1");
-    ofxHelpMessage::addString(&str2, "myString2");
+    ofxHelpMessage::addText("text4", "DEBUG:");
+    ofxHelpMessage::addString("myString1", &str1);
+    ofxHelpMessage::addString("myString2", &str2);
+    ofxHelpMessage::addFloat("myFloat1 ", &f1);
+    ofxHelpMessage::addFloat("myFloat2 ", &f2);
+    ofxHelpMessage::addFloat("myFloat3 ", &f3);
+    ofxHelpMessage::addFloat("myFloat4 ", &f4);
 
-    ofxHelpMessage::addFloat(&f1, "myFloat1");
-    ofxHelpMessage::addFloat(&f2, "myFloat2");
-    ofxHelpMessage::addFloat(&f3, "myFloat3");
-    ofxHelpMessage::addFloat(&f4, "myFloat4");
+    ofxHelpMessage::addText("text", "\nCOUNTERS:");
+    ofxHelpMessage::addInt("myInt1   ", &i1);
+    ofxHelpMessage::addInt("myInt2   ", &i2);
 
-    ofxHelpMessage::addInt(&i1, "myInt1");
-    ofxHelpMessage::addInt(&i2, "myInt2");
+    ofxHelpMessage::addText("text", "\nSWITCHES:\n");
+    ofxHelpMessage::addBool("myBool1  ", &b1);
+    ofxHelpMessage::addBool("myBool2  ", &b2);
 
-    ofxHelpMessage::addBool(&b1, "myBool1");
-    ofxHelpMessage::addBool(&b2, "myBool2");
+    // clear message
+    //ofxHelpMessage::clear();
 
-	// clear message
-	//ofxHelpMessage::clear();
+    // set text color
+    // default: ofColor::white
+    //ofxHelpMessage::setTextColor(ofColor(255, 255, 0));
 
-	// set text color
-	// default: ofColor::white
-	//ofxHelpMessage::setTextColor(ofColor(255, 255, 0));
+    // set background color
+    // default: ofColor(0, 0, 0, 150) this is black transparently
+    //ofxHelpMessage::setBackgroundColor(ofColor(0));
 
-	// set background color
-	// default: ofColor(0, 0, 0, 150) this is black transparently
-	//ofxHelpMessage::setBackgroundColor(ofColor(0));
-
-	// set font
-	// draw with ofTrueTypeFont if loaded
-//    ofxHelpMessage::loadFont("arial.ttf", fSize);
-//    ofxHelpMessage::loadFont("Kazesawa-Extrabold.ttf", fSize);
-//    ofxHelpMessage::loadFont("Kazesawa-Light.ttf", fSize);
+    // set font
+    // draw with ofTrueTypeFont if loaded
+    //ofxHelpMessage::loadFont("arial.ttf", fSize);
     ofxHelpMessage::loadFont("overpass-mono-light.otf", fSize);
 
-	// set position
-	// default: (10, 10)
-    ofxHelpMessage::setPos(200, 200);
+    // set position
+    // default: (10, 10)
+    ofxHelpMessage::setPos(400, 200);
 
-	// change show message key
-	// default: '?'
+    // change show message key
+    // default: '?'
     ofxHelpMessage::setHelpKey(' ');
 
-	// set show mode to momentary/toggle
-	// default: true (momentary)
+    // set show mode to momentary/toggle
+    // default: true (momentary)
     ofxHelpMessage::setMomentary(false); // toggle mode
+
+
+    // set margin borders
+    // default 5
+    ofxHelpMessage::setMarginBorders(20);
+
+    // tab labeles and values
+    ofxHelpMessage::setTabbed(true, 1);
+
+    // round bbox
+    ofxHelpMessage::setRounded(true, 5.0f);
+
+    // show
+    ofxHelpMessage::setVisible(true);
 
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
-	// nothing to do
+    // nothing to do
 
     ///-
 
@@ -116,5 +130,5 @@ void ofApp::update() {
 
 //--------------------------------------------------------------
 void ofApp::draw() {
-	// nothing to show
+    // nothing to show
 }

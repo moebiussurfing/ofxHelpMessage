@@ -19,11 +19,12 @@ public:
     };
 
     static void setTitle(string _title);
-    static void addText(string _message, string name, bool _newLine = true);
-    static void addString(string *label, string name, bool _newLine = true);
-    static void addFloat(float *var, string name, bool _newLine = true);
-    static void addInt(int *var, string name, bool _newLine = true);
-    static void addBool(bool *var, string name, bool _newLine = true);
+
+    static void addText(string name, string _message, bool _newLine = true);
+    static void addString(string name, string *label, bool _newLine = true);
+    static void addFloat(string name, float *var, bool _newLine = true);
+    static void addInt(string name, int *var, bool _newLine = true);
+    static void addBool(string name, bool *var, bool _newLine = true);
 
     ///-
 
@@ -46,6 +47,12 @@ public:
     static void setMomentary(bool _momentary);
     static bool getMomentary();
     static bool getSwhoing();
+
+    static void setMarginBorders(int _margin);
+    static void setTabbed(bool b, int num = 1);
+    static void setRounded(bool b, int size = 10.0f);
+
+    static void setVisible(bool _showing);
 
 private:
 
@@ -94,9 +101,6 @@ private:
     bool bRounded = false;
     float roundedSize = 10.0f;
 
-    static void setMarginBorders(int _margin);
-    static void setTabbed(bool b, int num = 1);
-    static void setRounded(bool b, int size = 10.0f);
-
+    ofRectangle rectBB;
 };
 

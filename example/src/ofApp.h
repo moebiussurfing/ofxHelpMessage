@@ -10,8 +10,8 @@ public:
     void update();
     void draw();
 
-    float fSize = 10;
-    
+    float fSize = 9;
+
     string title;
     string str1, str2;
     float f1, f2, f3, f4;
