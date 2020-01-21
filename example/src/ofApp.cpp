@@ -5,20 +5,31 @@ void ofApp::setup() {
 
     ofSetFrameRate(25);
 
+//    ofEnableDataPath();
+
     // add message
-	ofxHelpMessage::addMessage("HELP (dummy message)", "line1");
-	ofxHelpMessage::addMessage("Key S: Save", "line2");
-	ofxHelpMessage::addMessage("Key L: Load", "line3");
-	ofxHelpMessage::addMessage(" ", "line4");
 
-    ofxHelpMessage::addVar(&f1, "myFloat1");
-    ofxHelpMessage::addVar(&f2, "myFloat2");
-    ofxHelpMessage::addVar(&f3, "myFloat3");
-    ofxHelpMessage::addVar(&f4, "myFloat4");
+    title = "FONTS DEBUG";
+    ofxHelpMessage::setTitle(title);
 
-    ofxHelpMessage::addTitle(&tit1, "title1");
-    ofxHelpMessage::addTitle(&tit2, "title2");
+    ofxHelpMessage::addText("HELP:", "text1");
+	ofxHelpMessage::addText("Key [SPACE]: HIDE/SHOW", "text2");
+	ofxHelpMessage::addText("Key [D]: DEBUG", "text3");
+	ofxHelpMessage::addText(" ", "text4");
 
+    ofxHelpMessage::addString(&str1, "myString1");
+    ofxHelpMessage::addString(&str2, "myString2");
+
+    ofxHelpMessage::addFloat(&f1, "myFloat1");
+    ofxHelpMessage::addFloat(&f2, "myFloat2");
+    ofxHelpMessage::addFloat(&f3, "myFloat3");
+    ofxHelpMessage::addFloat(&f4, "myFloat4");
+
+    ofxHelpMessage::addInt(&i1, "myInt1");
+    ofxHelpMessage::addInt(&i2, "myInt2");
+
+    ofxHelpMessage::addBool(&b1, "myBool1");
+    ofxHelpMessage::addBool(&b2, "myBool2");
 
 	// clear message
 	//ofxHelpMessage::clear();
@@ -33,11 +44,14 @@ void ofApp::setup() {
 
 	// set font
 	// draw with ofTrueTypeFont if loaded
-	//ofxHelpMessage::loadFont("arial.ttf", 20);
+//    ofxHelpMessage::loadFont("arial.ttf", fSize);
+//    ofxHelpMessage::loadFont("Kazesawa-Extrabold.ttf", fSize);
+//    ofxHelpMessage::loadFont("Kazesawa-Light.ttf", fSize);
+    ofxHelpMessage::loadFont("overpass-mono-light.otf", fSize);
 
 	// set position
 	// default: (10, 10)
-	//ofxHelpMessage::setPos(500, 500);
+    ofxHelpMessage::setPos(200, 200);
 
 	// change show message key
 	// default: '?'
@@ -47,41 +61,57 @@ void ofApp::setup() {
 	// default: true (momentary)
     ofxHelpMessage::setMomentary(false); // toggle mode
 
-    ofxHelpMessage::setTitle("FONTS DEBUG");
 }
 
 //--------------------------------------------------------------
 void ofApp::update() {
 	// nothing to do
 
-    f1 = ofRandom (0,1);
-    f2 = ofRandom (0,1);
-    f3 = ofRandom (0,1);
-    f4 = ofRandom (0,1);
+    ///-
 
-    int strRandom1 = ofRandom(0,5);
-    switch (strRandom1) {
+    //make random changes to our variables to demo
+
+    int time = ofGetFrameNum();
+
+    //string
+    int myRandom = ofRandom(0,5);
+    switch (myRandom) {
         case 0:
-            tit1 = "|    ";
+            str1 = "|----";
             break;
         case 1:
-            tit1 = " |   ";
+            str1 = "-|---";
             break;
         case 2:
-            tit1 = "  |  ";
+            str1 = "--|--";
             break;
         case 3:
-            tit1 = "   | ";
+            str1 = "---|-";
             break;
         case 4:
-            tit1 = "    |";
+            str1 = "----|";
             break;
         default:
             break;
     }
 
-    float time = ofGetFrameNum();
-    tit2 = ofToString(time);
+    //string
+    str2 = ofToString(time);
+
+    //floats
+    f1 = ofRandom (0,1);
+    f2 = ofRandom (0,1);
+    f3 = ofRandom (0,1);
+    f4 = ofRandom (0,1);
+
+    //ints
+    i1 = time;
+    i2 = ofGetFrameNum() % 60;
+
+    //bools
+    if (ofGetFrameNum() % 60) b1=!b1;
+    if (myRandom == 4) b2=!b2;
+
 }
 
 //--------------------------------------------------------------

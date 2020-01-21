@@ -12,16 +12,18 @@ public:
     enum MSG_TYPES{
         MSG_TITLE = 0,
         MSG_TEXT,
-        MSG_FLOAT,
         MSG_STRING,
+        MSG_FLOAT,
+        MSG_INT,
         MSG_BOOL
     };
 
     static void setTitle(string _title);
-
-    static void addMessage(string _message, string name, bool _newLine = true);
-    static void addVar(float *var, string name, bool _newLine = true);
-    static void addTitle(string *label, string name, bool _newLine = true);
+    static void addText(string _message, string name, bool _newLine = true);
+    static void addString(string *label, string name, bool _newLine = true);
+    static void addFloat(float *var, string name, bool _newLine = true);
+    static void addInt(int *var, string name, bool _newLine = true);
+    static void addBool(bool *var, string name, bool _newLine = true);
 
     ///-
 
@@ -47,7 +49,7 @@ public:
 
 private:
 
-    unordered_map<string, double> maptest;
+//    unordered_map<string, double> maptest;
 
     static ofxHelpMessage *singleton;
     static void singletonGenerate();
@@ -75,11 +77,26 @@ private:
     vector<MSG_Item> items;
 
     std::string title;
-
     vector<std::string> messages;
-    vector<std::string*> titles;
-    vector<float *> vars;
+    vector<std::string*> strings;
+    vector<float *> floats;
+    vector<int *> ints;
+    vector<bool *> bools;
 
-    void updateVars();
+    void updateItems();
+
+    ///-
+
+    //layout
+    int margin = 5;
+    bool bTabbed = false;
+    int tabsNum = 1;
+    bool bRounded = false;
+    float roundedSize = 10.0f;
+
+    static void setMarginBorders(int _margin);
+    static void setTabbed(bool b, int num = 1);
+    static void setRounded(bool b, int size = 10.0f);
+
 };
 
