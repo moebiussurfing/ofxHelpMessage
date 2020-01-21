@@ -53,7 +53,8 @@ public:
     static void setRounded(bool b, float size = 10.0f);
     static void setFloatResolution(int res = 2);
 
-    static void setShowing(bool _showing);
+	static void setShowing(bool _showing);
+	static void setShowFPS(bool _showing);
 
 private:
 
@@ -64,6 +65,7 @@ private:
 
     bool initialized;
     bool showing, momentary;
+	bool showFPS;
     ofColor textColor, bgColor;
     ofVec2f pos;
     void updateDrawPos();

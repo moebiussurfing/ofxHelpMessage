@@ -72,11 +72,12 @@ void ofApp::setup() {
     ofxHelpMessage::setFloatResolution(3);
 
     // round bbox
-    ofxHelpMessage::setRounded(true);
+    //ofxHelpMessage::setRounded(true);
 
     // show
     ofxHelpMessage::setShowing(true);
 
+	ofxHelpMessage::setShowFPS(true);
 }
 
 //--------------------------------------------------------------
