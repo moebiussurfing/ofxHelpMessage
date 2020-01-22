@@ -33,15 +33,16 @@ setup()
     // set first line tittle
     ofxHelpMessage::setTitle("APP INFO                \n");
     
+    // name is not used in this type. no variable, just the string text
+    ofxHelpMessage::addText("noName", "KEY [SPACE]: HIDE/SHOW");
+    
     // add the referenced variables that you what to show printed in the screen box
     // pass all variables as reference
     ofxHelpMessage::addString("myString1", &str1);ofxHelpMessage::addFloat("myFloat1 ", &f1);
     ofxHelpMessage::addInt("myInt1", &i1);
     ofxHelpMessage::addBool("myBool1", &b1);
-    // name is not used in this type. no variable, just the string text
-    ofxHelpMessage::addText("noName", "KEY [SPACE]: HIDE/SHOW");
     
-    // optional:
+    // customize style
     // set margin borders
     ofxHelpMessage::setMarginBorders(20);
     // tab labels and values
@@ -67,10 +68,11 @@ ofxHelpMessage::addString("myString", (string*)&stringParam.get());//put your cu
 ```
 
 TODO:
-+improve string columns align by tabs '\t'.
-+enable drag box position by mouse.
-+store/recall position and settings to xml.
-+enable multiple boxes or just split to another addon without singleton.
+
++ improve string columns align by tabs '\t'.
++ enable drag box position by mouse.
++ store/recall position and settings to xml.
++ enable multiple boxes or just split to another addon without singleton.
 
 -------------------------------------------------------------------------------------------------------
 
