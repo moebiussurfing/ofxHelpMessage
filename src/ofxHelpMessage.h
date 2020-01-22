@@ -26,34 +26,40 @@ public:
     static void addInt(string name, int *var, bool _newLine = true);
     static void addBool(string name, bool *var, bool _newLine = true);
 
+	//TODO:
+	//add abstractParameter
+
     ///-
 
     void draw(ofEventArgs &e);
     void keyPressed(ofKeyEventArgs& key);
 
     // static function
-    static void loadFont(string _path, float _size);
 
     static void clear();
-    static void setPos(ofVec2f _pos);
-    static void setPos(float _x, float _y);
-    static ofVec2f getPos();
-    static void setTextColor(ofColor _color);
-    static ofColor getTextColor();
-    static void setBackgroundColor(ofColor _color);
-    static ofColor getBackgroundColor();
-    static void setHelpKey(char _key);
+  
+	static void setHelpKey(char _key);
     static char getHelpKey();
     static void setMomentary(bool _momentary);
     static bool getMomentary();
     static bool getSwhoing();
-
-    static void setMarginBorders(int _margin);
-    static void setTabbed(bool b, int num = 1);
-    static void setRounded(bool b, float size = 10.0f);
-    static void setFloatResolution(int res = 2);
-
 	static void setShowing(bool _showing);
+
+    static void loadFont(string _path, float _size);
+	static void setPos(ofVec2f _pos);
+	static void setPos(float _x, float _y);
+	static ofVec2f getPos();
+
+	static void setTextColor(ofColor _color);
+	static ofColor getTextColor();
+	static void setBackgroundColor(ofColor _color);
+	static ofColor getBackgroundColor();
+
+    static void setTabbed(bool b, int num = 1);
+    static void setFloatResolution(int res = 2);
+    static void setMarginBorders(int _margin);
+    static void setRounded(bool b, float size = 10.0f);
+
 	static void setShowFPS(bool _showing);
 
 private:
@@ -62,18 +68,19 @@ private:
 
     static ofxHelpMessage *singleton;
     static void singletonGenerate();
-
-    bool initialized;
+    ofMutex mutex;
+	bool initialized;
+	    
+    char helpKey;
     bool showing, momentary;
-	bool showFPS;
+	bool BBoxShowing;
     ofColor textColor, bgColor;
     ofVec2f pos;
-    void updateDrawPos();
     ofVec2f drawPos;
-    char helpKey;
-    ofMutex mutex;
 
     ofTrueTypeFont font;
+
+    void updateDrawPos();
 
     ///-
 
@@ -98,12 +105,13 @@ private:
     ///-
 
     //layout
-    int margin = 5;
     bool bTabbed = false;
     int tabsNum = 1;
+    int fRes = 2;
+    int margin = 5;
     bool bRounded = false;
     float roundedSize = 10.0f;
-    int fRes = 2;
+	bool showFPS;
 
     ofRectangle rectBB;
 

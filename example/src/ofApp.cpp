@@ -44,9 +44,9 @@ void ofApp::setup() {
 
     // set font
     // draw with ofTrueTypeFont if loaded
-    //ofxHelpMessage::loadFont("arial.ttf", fSize);
-    //ofxHelpMessage::loadFont("overpass-mono-light.otf", fSize);
-	ofxHelpMessage::loadFont("mono.ttf", fSize);
+    //ofxHelpMessage::loadFont("arial.ttf", fontSize);
+    //ofxHelpMessage::loadFont("overpass-mono-light.otf", fontSize);
+	ofxHelpMessage::loadFont("mono.ttf", fontSize);
 
     // set position
     // default: (10, 10)
@@ -69,15 +69,16 @@ void ofApp::setup() {
     ofxHelpMessage::setTabbed(true, 1);
 
     // float decimals
-    ofxHelpMessage::setFloatResolution(3);
+    ofxHelpMessage::setFloatResolution(1);
 
     // round bbox
     //ofxHelpMessage::setRounded(true);
 
-    // show
-    ofxHelpMessage::setShowing(true);
-
+	// show fps
 	ofxHelpMessage::setShowFPS(true);
+
+    // show box. hidden by default
+    ofxHelpMessage::setShowing(true);
 }
 
 //--------------------------------------------------------------

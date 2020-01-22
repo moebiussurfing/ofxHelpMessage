@@ -109,7 +109,7 @@ void ofxHelpMessage::updateItems()
 				{
 					for (int i = 0; i < tabsNum; i++)
 					{
-						singleton->messageBox += "   \t";
+						singleton->messageBox += " \t ";
 					}
 				}
 			}
@@ -131,7 +131,7 @@ void ofxHelpMessage::updateItems()
 			{
 				for (int i = 0; i < tabsNum; i++)
 				{
-					singleton->messageBox += "   \t";
+					singleton->messageBox += " \t ";
 				}
 			}
 			//singleton->messageBox += ":";
@@ -151,7 +151,7 @@ void ofxHelpMessage::updateItems()
 			{
 				for (int i = 0; i < tabsNum; i++)
 				{
-					singleton->messageBox += "   \t";
+					singleton->messageBox += " \t ";
 				}
 			}
 			//singleton->messageBox += ":";
@@ -171,7 +171,7 @@ void ofxHelpMessage::updateItems()
 			{
 				for (int i = 0; i < tabsNum; i++)
 				{
-					singleton->messageBox += "   \t";
+					singleton->messageBox += " \t ";
 				}
 			}
 			//singleton->messageBox += ":";
@@ -191,7 +191,7 @@ void ofxHelpMessage::updateItems()
 			{
 				for (int i = 0; i < tabsNum; i++)
 				{
-					singleton->messageBox += "   \t";
+					singleton->messageBox += " \t ";
 				}
 			}
 			//singleton->messageBox += ":";
@@ -217,18 +217,17 @@ void ofxHelpMessage::updateItems()
 	singleton->updateDrawPos();
 }
 
+///-
 
 ofxHelpMessage::ofxHelpMessage() {
 	showing = false;
+	BBoxShowing = true;
 	momentary = true;
 	initialized = true;
 	textColor = ofColor::white;
 	bgColor = ofColor(0, 150);
 	pos.set(10, 10);
 	helpKey = '?';
-
-	//    ofEnableDataPath();
-
 
 	messageBox = "";
 
@@ -253,30 +252,31 @@ void ofxHelpMessage::draw(ofEventArgs& e) {
 		if (font.isLoaded()) {
 
 			//bbox
-			ofSetColor(bgColor);
-			ofFill();
-
-			//ofDrawRectangle(font.getStringBoundingBox(messageBox, drawPos.x, drawPos.y));
-
-			//resize
-			rectBB = font.getStringBoundingBox(messageBox, drawPos.x, drawPos.y);
-			rectBB.x -= margin;
-			rectBB.y -= margin;
-			rectBB.height += 2 * margin;
-			rectBB.width += 2 * margin;
-
-			//to compensate pos after margin
-			ofPushMatrix();
-			ofTranslate(margin, margin);
-
-			//rounded
-			if (bRounded)
+			if (BBoxShowing)
 			{
-				ofDrawRectRounded(rectBB, roundedSize);
-			}
-			else
-			{
-				ofDrawRectangle(rectBB);
+				ofSetColor(bgColor);
+				ofFill();
+
+				//bbox
+				rectBB = font.getStringBoundingBox(messageBox, drawPos.x, drawPos.y);
+				rectBB.x -= margin;
+				rectBB.y -= margin;
+				rectBB.height += 2 * margin;
+				rectBB.width += 2 * margin;
+
+				//to compensate pos after margin
+				ofPushMatrix();
+				ofTranslate(margin, margin);
+
+				//rounded
+				if (bRounded)
+				{
+					ofDrawRectRounded(rectBB, roundedSize);
+				}
+				else
+				{
+					ofDrawRectangle(rectBB);
+				}
 			}
 
 			//text
@@ -298,51 +298,9 @@ void ofxHelpMessage::keyPressed(ofKeyEventArgs& key) {
 	}
 }
 
-void ofxHelpMessage::loadFont(string _path, float _size) {
-	singletonGenerate();
-	singleton->font.load(_path, _size);
-	singleton->updateDrawPos();
-}
-
-
 void ofxHelpMessage::clear() {
 	singletonGenerate();
 	singleton->messageBox = "";
-}
-
-void ofxHelpMessage::setPos(ofVec2f _pos) {
-	singletonGenerate();
-	singleton->pos.set(_pos);
-	singleton->updateDrawPos();
-}
-
-void ofxHelpMessage::setPos(float _x, float _y) {
-	setPos(ofVec2f(_x, _y));
-}
-
-ofVec2f ofxHelpMessage::getPos() {
-	singletonGenerate();
-	return singleton->pos;
-}
-
-void ofxHelpMessage::setTextColor(ofColor _color) {
-	singletonGenerate();
-	singleton->textColor.set(_color);
-}
-
-ofColor ofxHelpMessage::getTextColor() {
-	singletonGenerate();
-	return singleton->textColor;
-}
-
-void ofxHelpMessage::setBackgroundColor(ofColor _color) {
-	singletonGenerate();
-	singleton->bgColor = _color;
-}
-
-ofColor ofxHelpMessage::getBackgroundColor() {
-	singletonGenerate();
-	return singleton->bgColor;
 }
 
 void ofxHelpMessage::setHelpKey(char _key) {
@@ -400,21 +358,68 @@ void ofxHelpMessage::updateDrawPos() {
 }
 
 //layout
+
+void ofxHelpMessage::setPos(ofVec2f _pos) {
+	singletonGenerate();
+	singleton->pos.set(_pos);
+	singleton->updateDrawPos();
+}
+
+void ofxHelpMessage::setPos(float _x, float _y) {
+	setPos(ofVec2f(_x, _y));
+}
+
+ofVec2f ofxHelpMessage::getPos() {
+	singletonGenerate();
+	return singleton->pos;
+}
+
+//colors
+void ofxHelpMessage::setTextColor(ofColor _color) {
+	singletonGenerate();
+	singleton->textColor.set(_color);
+}
+
+ofColor ofxHelpMessage::getTextColor() {
+	singletonGenerate();
+	return singleton->textColor;
+}
+
+void ofxHelpMessage::setBackgroundColor(ofColor _color) {
+	singletonGenerate();
+	singleton->bgColor = _color;
+}
+
+ofColor ofxHelpMessage::getBackgroundColor() {
+	singletonGenerate();
+	return singleton->bgColor;
+}
+
+//font
+void ofxHelpMessage::loadFont(string _path, float _size) {
+	singletonGenerate();
+	singleton->font.load(_path, _size);
+	singleton->updateDrawPos();
+}
+
+//layout
 void ofxHelpMessage::setMarginBorders(int _margin) {
 	singletonGenerate();
 	singleton->margin = _margin;
-}
-
-void ofxHelpMessage::setTabbed(bool b, int num) {
-	singletonGenerate();
-	singleton->bTabbed = b;
-	singleton->tabsNum = num;
 }
 
 void ofxHelpMessage::setRounded(bool b, float size) {
 	singletonGenerate();
 	singleton->bRounded = b;
 	singleton->roundedSize = size;
+}
+
+//TODO:
+//must repair columns align by tabs
+void ofxHelpMessage::setTabbed(bool b, int num) {
+	singletonGenerate();
+	singleton->bTabbed = b;
+	singleton->tabsNum = num;
 }
 
 void ofxHelpMessage::setFloatResolution(int res) {

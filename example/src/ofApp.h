@@ -10,7 +10,7 @@ public:
     void update();
     void draw();
 
-    float fSize = 9;
+    float fontSize = 9;
 
     string title;
     string str1, str2;
