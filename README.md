@@ -32,11 +32,12 @@ setup()
 
     // add the referenced variables that you what to show printed in the screen box
     ofxHelpMessage::setTitle("APP INFO                \n");
-    ofxHelpMessage::addText("text2", "KEY [SPACE]: HIDE/SHOW");//name is not used in this type. no variable, just the text
-    ofxHelpMessage::addString("myString1", &str1);//pass all variables as references
-    ofxHelpMessage::addFloat("myFloat1 ", &f1);
+    //pass all variables as reference
+    ofxHelpMessage::addString("myString1", &str1);ofxHelpMessage::addFloat("myFloat1 ", &f1);
     ofxHelpMessage::addInt("myInt1   ", &i1);
     ofxHelpMessage::addBool("myBool1  ", &b1);
+    //name is not used in this type. no variable, just the text
+    ofxHelpMessage::addText("text2", "KEY [SPACE]: HIDE/SHOW");
     
     //optional:
     // set margin borders
@@ -48,8 +49,8 @@ setup()
     // show
     ofxHelpMessage::setVisible(true);
 
-
 update()
+
     //your variables will change...
     //but nothing more to do.
 ```
@@ -64,8 +65,8 @@ ofxHelpMessage::addString("myString", (string*)&stringParam.get());//put your cu
 ```
 
 TODO:
-+improve columns align by tabs \t
-+enable drag box by mouse
++improve string columns align by tabs '\t'
++enable drag box position by mouse
 +store/recall position and settings to xml
 +enable multiple boxes or just split to another addon without singleton
 
