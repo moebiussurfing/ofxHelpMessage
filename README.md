@@ -7,6 +7,8 @@ You can add text messages like the original addon, but you can show other variab
 Added variables (string, float, int, bool) are referenced, and can be showed in realtime in the same text box.
 You dont need to update nothing.
 
+The class uses a singleton, so you can add referenced variables (or text) from any of your included classes. You just need to add this header to your classes. All classes will "share" the same text box.
+
 Changes by MoebiusSurfing. Original author: Toru Takata, Thanks!
 
 ![Alt text](/screenshot.jpg?raw=true "MoebiusSurfing")
