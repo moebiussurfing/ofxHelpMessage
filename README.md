@@ -30,16 +30,18 @@ Changes by MoebiusSurfing. Original author: Toru Takata, Thanks!
 
 setup()
 
-    // add the referenced variables that you what to show printed in the screen box
+    // set first line tittle
     ofxHelpMessage::setTitle("APP INFO                \n");
-    //pass all variables as reference
-    ofxHelpMessage::addString("myString1", &str1);ofxHelpMessage::addFloat("myFloat1 ", &f1);
-    ofxHelpMessage::addInt("myInt1   ", &i1);
-    ofxHelpMessage::addBool("myBool1  ", &b1);
-    //name is not used in this type. no variable, just the text
-    ofxHelpMessage::addText("text2", "KEY [SPACE]: HIDE/SHOW");
     
-    //optional:
+    // add the referenced variables that you what to show printed in the screen box
+    // pass all variables as reference
+    ofxHelpMessage::addString("myString1", &str1);ofxHelpMessage::addFloat("myFloat1 ", &f1);
+    ofxHelpMessage::addInt("myInt1", &i1);
+    ofxHelpMessage::addBool("myBool1", &b1);
+    // name is not used in this type. no variable, just the string text
+    ofxHelpMessage::addText("noName", "KEY [SPACE]: HIDE/SHOW");
+    
+    // optional:
     // set margin borders
     ofxHelpMessage::setMarginBorders(20);
     // tab labels and values
