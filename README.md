@@ -67,7 +67,7 @@ ofParameter<string> stringParam;
 ofxHelpMessage::addString("myString", (string*)&stringParam.get());//put your custom name
 ```
 
-TODO:
+### TODO:
 
 + improve string columns align by tabs '\t'.
 + enable drag box position by mouse.
