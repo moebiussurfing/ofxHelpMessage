@@ -2,7 +2,7 @@
 
 ## CHANGES IN THIS FORK:
 
-You can add text messages like the original addon, but you can show other variables too.
+You can add text messages like the original addon, but you can add/show variables too.
 
 Added variables (string, float, int, bool) are referenced, and can be showed in realtime in the same text box.
 You dont need to update nothing.
@@ -52,6 +52,15 @@ setup()
 update()
     //your variables will change...
     //but nothing more to do.
+```
+
+You can use this workaround to add ofParameters too:
+```cpp 
+ofParameter<float> floatParam;
+ofxHelpMessage::addFloat(floatParam.getName(), (float*)&floatParam.get());//get name from parameter
+
+ofParameter<string> stringParam;
+ofxHelpMessage::addString("myString", (string*)&stringParam.get());//put your custom name
 ```
 
 -------------------------------------------------------------------------------------------------------
