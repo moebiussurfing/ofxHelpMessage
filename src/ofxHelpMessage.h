@@ -55,6 +55,8 @@ public:
 	static void setBackgroundColor(ofColor _color);
 	static ofColor getBackgroundColor();
 
+	static void setBackgroundAlpha(int _alpha);
+
     static void setTabbed(bool b, int num = 1);
     static void setFloatResolution(int res = 2);
     static void setMarginBorders(int _margin);

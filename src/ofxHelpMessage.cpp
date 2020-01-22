@@ -228,6 +228,7 @@ ofxHelpMessage::ofxHelpMessage() {
 	bgColor = ofColor(0, 150);
 	pos.set(10, 10);
 	helpKey = '?';
+	showFPS = false;
 
 	messageBox = "";
 
@@ -241,6 +242,9 @@ ofxHelpMessage::~ofxHelpMessage() {
 }
 
 void ofxHelpMessage::draw(ofEventArgs& e) {
+
+	ofEnableAlphaBlending();
+
 	if (momentary) {
 		showing = ofGetKeyPressed(helpKey);
 	}
@@ -388,6 +392,12 @@ ofColor ofxHelpMessage::getTextColor() {
 void ofxHelpMessage::setBackgroundColor(ofColor _color) {
 	singletonGenerate();
 	singleton->bgColor = _color;
+}
+
+void ofxHelpMessage::setBackgroundAlpha(int _alpha) {
+	singletonGenerate();
+	ofColor c = singleton->bgColor;
+	singleton->bgColor.set(c.r, c.g, c.b, _alpha);
 }
 
 ofColor ofxHelpMessage::getBackgroundColor() {
