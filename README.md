@@ -67,10 +67,10 @@ ofxHelpMessage::addString("myString", (string*)&stringParam.get());//put your cu
 ```
 
 TODO:
-+improve string columns align by tabs '\t'
-+enable drag box position by mouse
-+store/recall position and settings to xml
-+enable multiple boxes or just split to another addon without singleton
++improve string columns align by tabs '\t'.
++enable drag box position by mouse.
++store/recall position and settings to xml.
++enable multiple boxes or just split to another addon without singleton.
 
 -------------------------------------------------------------------------------------------------------
 
