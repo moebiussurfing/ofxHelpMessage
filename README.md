@@ -63,6 +63,12 @@ ofParameter<string> stringParam;
 ofxHelpMessage::addString("myString", (string*)&stringParam.get());//put your custom name
 ```
 
+TODO:
++improve columns align by tabs \t
++enable drag box by mouse
++store/recall position and settings to xml
++enable multiple boxes or just split to another addon without singleton
+
 -------------------------------------------------------------------------------------------------------
 
 ## Overview
