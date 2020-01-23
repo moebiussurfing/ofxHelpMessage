@@ -49,7 +49,7 @@ setup()
     // customize style
     // set margin borders
     ofxHelpMessage::setMarginBorders(20);
-    // tab labels and values aligned by columns
+    // tab label names and variable values aligned by columns
     ofxHelpMessage::setTabbed(true, 1);
     // round bbox
     ofxHelpMessage::setRounded(true, 5.0f);
