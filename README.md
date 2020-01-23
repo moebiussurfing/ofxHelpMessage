@@ -42,6 +42,10 @@ setup()
     ofxHelpMessage::addInt("myInt1", &i1);
     ofxHelpMessage::addBool("myBool1", &b1);
     
+    //this is required if you want to show by default and without help-key pressed!
+    ofxHelpMessage::setMomentary(false);
+    //ofxHelpMessage::setHelpKey('d');
+    
     // customize style
     // set margin borders
     ofxHelpMessage::setMarginBorders(20);
