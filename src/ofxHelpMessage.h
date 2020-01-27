@@ -29,6 +29,7 @@ public:
 
 	//TODO:
 	//add abstractParameter
+	//static void addParamFloat(ofParameter<float> *p, bool _newLine = true);
 	static void addParamFloat(ofParameter<float> p, bool _newLine = true);
 
     ///-
@@ -105,6 +106,8 @@ private:
     vector<bool *> bools;
 
 	//params
+	//could be better to use pointers..?
+	//vector<ofParameter<float>*> paramsFloats;
 	vector<ofParameter<float>> paramsFloats;
 
     void updateItems();

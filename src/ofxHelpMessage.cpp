@@ -79,10 +79,12 @@ void ofxHelpMessage::addBool(string name, bool *var, bool _newLine)
 }
 
 void ofxHelpMessage::addParamFloat(ofParameter<float> p, bool _newLine)
+//void ofxHelpMessage::addParamFloat(ofParameter<float> *p, bool _newLine)
 {
 	singletonGenerate();
 	singleton->mutex.lock();
 
+	//string name = p->getName();
 	string name = p.getName();
 	singleton->paramsFloats.push_back(p);
 	int pos = singleton->paramsFloats.size() - 1;
@@ -220,6 +222,7 @@ void ofxHelpMessage::updateItems()
 		{
 			int ii = singleton->items[i].position;
 			string n = singleton->items[i].name;
+			//string v = ofToString(*singleton->paramsFloats[ii].get(), fRes);
 			string v = ofToString(singleton->paramsFloats[ii].get(), fRes);
 			singleton->messageBox += n;
 			//singleton->messageBox += ":";

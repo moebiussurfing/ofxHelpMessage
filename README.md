@@ -1,19 +1,26 @@
 # ofxHelpMessage
 
-## CHANGES IN THIS FORK:
+This is an openFrameworks addon to debug and print some variables of your ofApp in runtime without the need of updating anything. 
+Based in the original addon: https://github.com/tettou771/ofxHelpMessage from tettou771 (https://github.com/tettou771)
 
-You can add text messages like the original addon, but you can add/show variables too.
+You can add text messages and variables too.
 
 Added variables (string, float, int, bool) are referenced, and can be showed in realtime in the same text box.
 You dont need to update nothing.
 
 The class uses a singleton, so you can add referenced variables (or text) from any of your included classes. You just need to add this header to your classes. All classes will "share" the same text box.
 
-Changes by MoebiusSurfing. Original author: Toru Takata, Thanks!
 
 ![Alt text](/screenshot.jpg?raw=true "MoebiusSurfing")
 
+
 ## Usage
+
+1. Add this addon to your project.
+1. Include `ofxHelpMessage.h`.
+1. Put the static methods like `ofxHelpMessage::addText("saveKey", "Key S: save");` in setup().
+1. When program running, press '?' key to show text box.
+1. All your added variables will be printed to the screen text box.
 
 ### ofApp.h
 ```cpp
@@ -23,6 +30,7 @@ Changes by MoebiusSurfing. Original author: Toru Takata, Thanks!
     float f1;
     int i1;
     bool b1;
+    ofParameter<float> floatParam;
 ```
 
 ### ofApp.cpp
@@ -42,19 +50,22 @@ setup()
     ofxHelpMessage::addInt("myInt1", &i1);
     ofxHelpMessage::addBool("myBool1", &b1);
     
+    // float parameter
+    ofxHelpMessage::addParamFloat(floatParam);
+
     //ofxHelpMessage::setMomentary(true);
     //ofxHelpMessage::setHelpKey('d');
     
     // customize style
+    // show
+    ofxHelpMessage::setVisible(true);
+	// round bbox
+    ofxHelpMessage::setRounded(true, 5.0f);
     // set margin borders
     ofxHelpMessage::setMarginBorders(20);
     // tab label names and variable values aligned by columns
     ofxHelpMessage::setTabbed(true, 1);
-    // round bbox
-    ofxHelpMessage::setRounded(true, 5.0f);
-    // show
-    ofxHelpMessage::setVisible(true);
-
+    
 update()
 
     //your variables will change...
@@ -70,50 +81,20 @@ ofParameter<string> stringParam;
 ofxHelpMessage::addString("myString", (string*)&stringParam.get());//put your custom name
 ```
 
-### TODO:
-
-+ improve string columns align by tabs '\t'.
-+ enable drag box position by mouse.
-+ store/recall position and settings to xml.
-+ enable multiple boxes or just split to another addon without singleton.
-
--------------------------------------------------------------------------------------------------------
-
-## Overview
-
-This is an addon for openFrameworks.
-I made it to show help message on window easily.
-
-## Requirement
-
-ofxHelpMessage doesn't depend other addons.
 
 ## Tested system
 
+I think compatible almost all platforms, because it's a simple addon.
 - Windows 10 / VS2017 / OF 0.11.0
 - macOS / High Sierra / Xcode / OF 0.11.0
 
 
-I think compatible almost all versions, because it's simple addon.
-
-## Usage
-
-1. Add this addon.
-1. Include `ofxHelpMessage.h`.
-1. Put the static method `ofxHelpMessage::addMessage("Key S: save")`  in setup().
-1. When program running, press '?' key to show help message.
-
-
+## More Customization
 
 You can use some method to change appearance and behaviour.
 For example.
 
 ```cpp
-// add message
-ofxHelpMessage::addMessage("HELP (dummy message)");
-ofxHelpMessage::addMessage("Key S: Save");
-ofxHelpMessage::addMessage("Key L: Load");
-
 // clear message
 //ofxHelpMessage::clear();
 
@@ -143,10 +124,26 @@ ofxHelpMessage::setMomentary(false); // toggle mode
 
 ```
 
-## Author
+### TODO:
+
++ add ofParameters
++ improve string columns align by tabs '\t'.
++ enable drag box position by mouse.
++ store/recall position and settings to xml.
++ enable multiple boxes or just split to another addon without singleton.
+
+
+## Original Author of ofxHelpMessage
 
 Toru Takata in Japan.
 
-github: https://github.com/tettou771
+GitHub: https://github.com/tettou771
 
 link: http://tettou771.com
+
+
+## Modified by MoebiusSurfing
+
+GitHub: https://github.com/moebiussurfing
+
+link: https://www.instagram.com/moebiussurfing/
