@@ -78,6 +78,22 @@ void ofxHelpMessage::addBool(string name, bool *var, bool _newLine)
 	singleton->updateDrawPos();
 }
 
+void ofxHelpMessage::addParamFloat(ofParameter<float> p, bool _newLine)
+{
+	singletonGenerate();
+	singleton->mutex.lock();
+
+	string name = p.getName();
+	singleton->paramsFloats.push_back(p);
+	int pos = singleton->paramsFloats.size() - 1;
+	singleton->items.push_back(MSG_Item{ name, MSG_PARAM_FLOAT, pos });
+
+	singleton->mutex.unlock();
+	singleton->updateDrawPos();
+}
+
+//--
+
 void ofxHelpMessage::updateItems()
 {
 	//to read pointers every frame cycle
@@ -200,9 +216,31 @@ void ofxHelpMessage::updateItems()
 		}
 		break;
 
+		case MSG_PARAM_FLOAT:
+		{
+			int ii = singleton->items[i].position;
+			string n = singleton->items[i].name;
+			string v = ofToString(singleton->paramsFloats[ii].get(), fRes);
+			singleton->messageBox += n;
+			//singleton->messageBox += ":";
+			if (bTabbed)
+			{
+				for (int i = 0; i < tabsNum; i++)
+				{
+					singleton->messageBox += " \t ";
+				}
+			}
+			//singleton->messageBox += ":";
+			singleton->messageBox += v;
+			singleton->messageBox += "\n";
+		}
+		break;
+
 		default:
 			break;
 		}
+
+		//next
 		i++;
 	}
 
@@ -222,13 +260,14 @@ void ofxHelpMessage::updateItems()
 ofxHelpMessage::ofxHelpMessage() {
 	showing = false;
 	BBoxShowing = true;
-	momentary = true;
+	momentary = false;
 	initialized = true;
 	textColor = ofColor::white;
 	bgColor = ofColor(0, 150);
 	pos.set(10, 10);
 	helpKey = '?';
 	showFPS = false;
+	bTabbed = false;
 
 	messageBox = "";
 

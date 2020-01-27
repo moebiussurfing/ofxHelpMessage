@@ -15,7 +15,8 @@ public:
         MSG_STRING,
         MSG_FLOAT,
         MSG_INT,
-        MSG_BOOL
+        MSG_BOOL,
+		MSG_PARAM_FLOAT
     };
 
     static void setTitle(string _title);
@@ -28,6 +29,7 @@ public:
 
 	//TODO:
 	//add abstractParameter
+	static void addParamFloat(ofParameter<float> p, bool _newLine = true);
 
     ///-
 
@@ -101,6 +103,9 @@ private:
     vector<float *> floats;
     vector<int *> ints;
     vector<bool *> bools;
+
+	//params
+	vector<ofParameter<float>> paramsFloats;
 
     void updateItems();
 
