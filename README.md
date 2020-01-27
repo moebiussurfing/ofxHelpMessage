@@ -1,7 +1,8 @@
 # ofxHelpMessage
 
-This is an openFrameworks addon to debug and print some variables of your ofApp in runtime without the need of updating anything. 
-Based in the original addon: https://github.com/tettou771/ofxHelpMessage from tettou771 (https://github.com/tettou771)
+This is an openFrameworks addon to debug and print some variables of your ofApp in runtime without the need of updating anything.
+ 
+Based in the original addon: https://github.com/tettou771/ofxHelpMessage from Toru Takata (https://github.com/tettou771)
 
 You can add text messages and variables too.
 
@@ -59,7 +60,7 @@ setup()
     // customize style
     // show
     ofxHelpMessage::setVisible(true);
-	// round bbox
+    // round bbox
     ofxHelpMessage::setRounded(true, 5.0f);
     // set margin borders
     ofxHelpMessage::setMarginBorders(20);
