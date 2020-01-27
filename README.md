@@ -42,22 +42,34 @@ setup()
     // set first line tittle
     ofxHelpMessage::setTitle("APP INFO                \n");
     
+    // add variables:
+
     // name is not used in this type. no variable, just the string text
-    ofxHelpMessage::addText("noName", "KEY [SPACE]: HIDE/SHOW");
+    ofxHelpMessage::addText("KEY [SPACE]: HIDE/SHOW");//not required name on text type
+	//ofxHelpMessage::addText("noName", "KEY [SPACE]: HIDE/SHOW");
     
+    //add empty line to make space
+    ofxHelpMessage::addNewLine();
+
     // add the referenced variables that you what to show printed in the screen box
     // pass all variables as reference
     ofxHelpMessage::addString("myString1", &str1);ofxHelpMessage::addFloat("myFloat1 ", &f1);
     ofxHelpMessage::addInt("myInt1", &i1);
     ofxHelpMessage::addBool("myBool1", &b1);
     
-    // float parameter
+    // float parameter. only for float yes for now. get the name from the parameter
     ofxHelpMessage::addParamFloat(floatParam);
 
+
+	// control:
+
+	// change show text box key
     //ofxHelpMessage::setMomentary(true);
     //ofxHelpMessage::setHelpKey('d');
     
-    // customize style
+
+    // customize style:
+
     // show
     ofxHelpMessage::setVisible(true);
     // round bbox
@@ -115,20 +127,11 @@ ofxHelpMessage::loadFont("arial.ttf", 30);
 // default: (10, 10)
 ofxHelpMessage::setPos(500, 500);
 
-// change show message key
-// default: '?'
-ofxHelpMessage::setHelpKey(' ');
-
-// set show mode to momentary/toggle
-// default: true (momentary)
-ofxHelpMessage::setMomentary(false); // toggle mode
-
 ```
 
 ### TODO:
 
 + add ofParameters
-+ improve string columns align by tabs '\t'.
 + enable drag box position by mouse.
 + store/recall position and settings to xml.
 + enable multiple boxes or just split to another addon without singleton.
@@ -140,11 +143,11 @@ Toru Takata in Japan.
 
 GitHub: https://github.com/tettou771
 
-link: http://tettou771.com
+Link: http://tettou771.com
 
 
-## Modified by MoebiusSurfing
+## Modified and splitted by MoebiusSurfing
 
 GitHub: https://github.com/moebiussurfing
 
-link: https://www.instagram.com/moebiussurfing/
+Link: https://www.instagram.com/moebiussurfing/

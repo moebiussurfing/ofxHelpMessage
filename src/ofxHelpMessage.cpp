@@ -13,7 +13,38 @@ void ofxHelpMessage::setTitle(string _title)
 	singleton->updateDrawPos();
 }
 
+void ofxHelpMessage::addNewLine() {
+	string name = "noName";
+
+	singletonGenerate();
+	singleton->mutex.lock();
+
+	singleton->messages.push_back("\n");
+	int pos = singleton->messages.size() - 1;
+	singleton->items.push_back(MSG_Item{ name, MSG_TEXT, pos });
+
+	singleton->mutex.unlock();
+	singleton->updateDrawPos();
+}
+
 //name is hidden in MSG_TEXT types. maybe not required but could search item by name..
+void ofxHelpMessage::addText(string _message, bool _newLine) {
+	string name = "noName";
+	
+	singletonGenerate();
+	singleton->mutex.lock();
+
+	singleton->messages.push_back(_message);
+	int pos = singleton->messages.size() - 1;
+	singleton->items.push_back(MSG_Item{ name, MSG_TEXT, pos });
+
+	if (_message.size() > singleton->maxChars)
+		singleton->maxChars = _message.size();
+
+	singleton->mutex.unlock();
+	singleton->updateDrawPos();
+}
+
 void ofxHelpMessage::addText(string name, string _message, bool _newLine) {
 	singletonGenerate();
 	singleton->mutex.lock();
@@ -21,6 +52,9 @@ void ofxHelpMessage::addText(string name, string _message, bool _newLine) {
 	singleton->messages.push_back(_message);
 	int pos = singleton->messages.size() - 1;
 	singleton->items.push_back(MSG_Item{ name, MSG_TEXT, pos });
+
+	if(_message.size()> singleton->maxChars)
+		singleton->maxChars = _message.size();
 
 	singleton->mutex.unlock();
 	singleton->updateDrawPos();
@@ -35,6 +69,9 @@ void ofxHelpMessage::addString(string name, string *label, bool _newLine)
 	int pos = singleton->strings.size() - 1;
 	singleton->items.push_back(MSG_Item{ name, MSG_STRING, pos });
 
+	if (name.size() > singleton->maxChars)
+		singleton->maxChars = name.size();
+
 	singleton->mutex.unlock();
 	singleton->updateDrawPos();
 }
@@ -47,6 +84,9 @@ void ofxHelpMessage::addFloat(string name, float *var, bool _newLine)
 	singleton->floats.push_back(var);
 	int pos = singleton->floats.size() - 1;
 	singleton->items.push_back(MSG_Item{ name, MSG_FLOAT, pos });
+
+	if (name.size() > singleton->maxChars)
+		singleton->maxChars = name.size();
 
 	singleton->mutex.unlock();
 	singleton->updateDrawPos();
@@ -61,6 +101,9 @@ void ofxHelpMessage::addInt(string name, int *var, bool _newLine)
 	int pos = singleton->ints.size() - 1;
 	singleton->items.push_back(MSG_Item{ name, MSG_INT, pos });
 
+	if (name.size() > singleton->maxChars)
+		singleton->maxChars = name.size();
+
 	singleton->mutex.unlock();
 	singleton->updateDrawPos();
 }
@@ -73,6 +116,9 @@ void ofxHelpMessage::addBool(string name, bool *var, bool _newLine)
 	singleton->bools.push_back(var);
 	int pos = singleton->bools.size() - 1;
 	singleton->items.push_back(MSG_Item{ name, MSG_BOOL, pos });
+
+	if (name.size() > singleton->maxChars)
+		singleton->maxChars = name.size();
 
 	singleton->mutex.unlock();
 	singleton->updateDrawPos();
@@ -89,6 +135,9 @@ void ofxHelpMessage::addParamFloat(ofParameter<float> p, bool _newLine)
 	singleton->paramsFloats.push_back(p);
 	int pos = singleton->paramsFloats.size() - 1;
 	singleton->items.push_back(MSG_Item{ name, MSG_PARAM_FLOAT, pos });
+
+	if (name.size() > singleton->maxChars)
+		singleton->maxChars = name.size();
 
 	singleton->mutex.unlock();
 	singleton->updateDrawPos();
@@ -121,13 +170,15 @@ void ofxHelpMessage::updateItems()
 			if (false)
 			{
 				string n = singleton->items[i].name;
+				fillName(n);
+
 				singleton->messageBox += n;
 				//singleton->messageBox += ":";
 				if (bTabbed)
 				{
 					for (int i = 0; i < tabsNum; i++)
 					{
-						singleton->messageBox += " \t ";
+						singleton->messageBox += "\t";
 					}
 				}
 			}
@@ -141,7 +192,10 @@ void ofxHelpMessage::updateItems()
 		case MSG_STRING:
 		{
 			int ii = singleton->items[i].position;
+			
 			string n = singleton->items[i].name;
+			fillName(n);
+
 			string v = *singleton->strings[ii];
 			singleton->messageBox += n;
 			//singleton->messageBox += ":";
@@ -149,7 +203,7 @@ void ofxHelpMessage::updateItems()
 			{
 				for (int i = 0; i < tabsNum; i++)
 				{
-					singleton->messageBox += " \t ";
+					singleton->messageBox += "\t";
 				}
 			}
 			//singleton->messageBox += ":";
@@ -161,7 +215,10 @@ void ofxHelpMessage::updateItems()
 		case MSG_FLOAT:
 		{
 			int ii = singleton->items[i].position;
+			
 			string n = singleton->items[i].name;
+			fillName(n);
+
 			string v = ofToString(*singleton->floats[ii], fRes);
 			singleton->messageBox += n;
 			//singleton->messageBox += ":";
@@ -169,7 +226,7 @@ void ofxHelpMessage::updateItems()
 			{
 				for (int i = 0; i < tabsNum; i++)
 				{
-					singleton->messageBox += " \t ";
+					singleton->messageBox += "\t";
 				}
 			}
 			//singleton->messageBox += ":";
@@ -181,7 +238,10 @@ void ofxHelpMessage::updateItems()
 		case MSG_INT:
 		{
 			int ii = singleton->items[i].position;
+			
 			string n = singleton->items[i].name;
+			fillName(n);
+
 			string v = ofToString(*singleton->ints[ii]);
 			singleton->messageBox += n;
 			//singleton->messageBox += ":";
@@ -189,7 +249,7 @@ void ofxHelpMessage::updateItems()
 			{
 				for (int i = 0; i < tabsNum; i++)
 				{
-					singleton->messageBox += " \t ";
+					singleton->messageBox += "\t";
 				}
 			}
 			//singleton->messageBox += ":";
@@ -201,7 +261,10 @@ void ofxHelpMessage::updateItems()
 		case MSG_BOOL:
 		{
 			int ii = singleton->items[i].position;
+			
 			string n = singleton->items[i].name;
+			fillName(n);
+
 			string v = (*singleton->bools[ii] ? "TRUE" : "FALSE");
 			singleton->messageBox += n;
 			//singleton->messageBox += ":";
@@ -209,7 +272,7 @@ void ofxHelpMessage::updateItems()
 			{
 				for (int i = 0; i < tabsNum; i++)
 				{
-					singleton->messageBox += " \t ";
+					singleton->messageBox += "\t";
 				}
 			}
 			//singleton->messageBox += ":";
@@ -221,7 +284,10 @@ void ofxHelpMessage::updateItems()
 		case MSG_PARAM_FLOAT:
 		{
 			int ii = singleton->items[i].position;
+			
 			string n = singleton->items[i].name;
+			fillName(n);
+
 			//string v = ofToString(*singleton->paramsFloats[ii].get(), fRes);
 			string v = ofToString(singleton->paramsFloats[ii].get(), fRes);
 			singleton->messageBox += n;
@@ -230,7 +296,7 @@ void ofxHelpMessage::updateItems()
 			{
 				for (int i = 0; i < tabsNum; i++)
 				{
-					singleton->messageBox += " \t ";
+					singleton->messageBox += "\t";
 				}
 			}
 			//singleton->messageBox += ":";
@@ -273,6 +339,7 @@ ofxHelpMessage::ofxHelpMessage() {
 	bTabbed = false;
 
 	messageBox = "";
+	maxChars = 0;
 
 	ofAddListener(ofEvents().draw, this, &ofxHelpMessage::draw, OF_EVENT_ORDER_AFTER_APP);
 	ofAddListener(ofEvents().keyPressed, this, &ofxHelpMessage::keyPressed, OF_EVENT_ORDER_AFTER_APP);

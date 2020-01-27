@@ -21,8 +21,12 @@ public:
 
     static void setTitle(string _title);
 
-    static void addText(string name, string _message, bool _newLine = true);
-    static void addString(string name, string *label, bool _newLine = true);
+	static void addNewLine();
+
+	static void addText(string _message, bool _newLine = true);
+	static void addText(string name, string _message, bool _newLine = true);
+	
+	static void addString(string name, string *label, bool _newLine = true);
     static void addFloat(string name, float *var, bool _newLine = true);
     static void addInt(string name, int *var, bool _newLine = true);
     static void addBool(string name, bool *var, bool _newLine = true);
@@ -111,6 +115,33 @@ private:
 	vector<ofParameter<float>> paramsFloats;
 
     void updateItems();
+
+	//TODO:
+	//improve columns alignment
+	int maxChars;
+
+	//add defined number of to separate names from values
+	//void fillTabs(string &m)
+	//{
+	//	if (bTabbed)
+	//	{
+	//		for (int i = 0; i < tabsNum; i++)
+	//		{
+	//			singleton->m += " \t ";
+	//		}
+	//	}
+	//}
+
+	//fill all names with same size to align columns
+	void fillName(string &str)
+	{
+		int size = str.size();
+		int numSpacesToAdd = maxChars - size;
+		for (int i = 0; i < numSpacesToAdd; i++)
+		{
+			str += " ";
+		}
+	}
 
     ///-
 
